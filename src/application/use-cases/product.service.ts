@@ -14,15 +14,15 @@ export class  ProductService {
     return await this.repository.find();
   }
 
-  async post(product: Product){
-    await this.repository.save(product);
+  async post(product: Product): Promise<Product>{
+    return await this.repository.save(product);
   }
 
   async put(id: number, product: Product){
-    await this.repository.update(id, product);
+    return await this.repository.update(id, product);
   }
 
   async delete(id: number) {
-    await this.repository.delete(id);
+    return await this.repository.delete(id);
   }
 }

@@ -1,7 +1,9 @@
 import { Controller, HttpException, HttpStatus, Get, Post, Body, Put, Param, Query, Delete} from '@nestjs/common';
 import { ProductService} from '../../application/use-cases/product.service';
 import { Product } from '../../domain/models/product.entity';
-import { ResultDto } from '../../result/result.dto';
+import { ResultDto } from '../dtos/result/result.dto';
+import { CreateProductDto } from '../dtos/products/create-product.dto';
+import { ProductDto } from '../dtos/products/product.dto';
 
 @Controller('v1/products')
 export class ProductController {
@@ -18,10 +20,10 @@ export class ProductController {
   }
 
   @Post()
-  async post(@Body() model: Product) {
+  async post(@Body() createProduct: CreateProductDto) : Promise<ResultDto>{
     try {
-      await this.service.post(model);
-      return new ResultDto(null, true, model, null);
+      const product =  await this.service.post(CreateProductDto.fromDto(createProduct));
+      return new ResultDto(null, true, ProductDto.toDto(product), null);
     } catch (error) {
       throw new HttpException(new ResultDto('Não foi possível incluir o produto', false, null, error), HttpStatus.BAD_REQUEST);
     }
