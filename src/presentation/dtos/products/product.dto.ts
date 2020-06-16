@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, plainToClass } from 'class-transformer';
-import { Product } from '../../../domain/models/product.entity';
+import { Product } from '../../../domain/models/products/product';
 
 export class ProductDto {
   @Expose()

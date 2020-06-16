@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty } from 'class-validator';
-import { Product } from '../../../domain/models/product.entity';
+import { Product } from '../../../domain/models/products/product';
 
 export class CreateProductDto {
   @IsString()

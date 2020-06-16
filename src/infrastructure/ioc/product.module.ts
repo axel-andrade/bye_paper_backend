@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from '../../domain/models/product.entity';
 import { ProductService } from '../../application/use-cases/product.service';
 import { ProductController } from '../../presentation/controllers/product.controller';
+import { IProductRepository } from '../../application/ports/IProductRepository';
+import { ProductRepository } from '../database/repositories/ProductRepository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([
-    Product
-  ])],
+  imports: [],
   providers: [
-    ProductService
+    ProductService,
+    { provide: IProductRepository, useClass: ProductRepository },
   ],
   controllers: [
     ProductController

@@ -34,7 +34,4 @@ export class Product implements IEntity{
     }
     return this.id === entity.id;
   }
-
-
-
 }
